@@ -1,0 +1,9 @@
+
+-this.state must be an object
+
+-useState can store
+  -string 
+  -number
+  -bool
+  -object
+  -array 
