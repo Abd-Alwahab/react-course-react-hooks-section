@@ -1,39 +1,31 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
+const oldUser = {
+  name: "Malak Sarukus",
+  age: 54,
+  role: "user",
+  photo:
+    "https://images.pexels.com/photos/2169434/pexels-photo-2169434.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
 };
 
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#modal");
+const HookState = () => {
+  const [user, setUser] = useState(oldUser);
 
-function HookState() {
-  const [error, setError] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
+  const updateUser = () => {
+    setUser({
+      name: "Rob",
+      age: 10,
+    });
   };
   return (
     <div>
-      <button onClick={openModal}>Open</button>
-      <Modal isOpen={modalIsOpen} style={customStyles} onRequestClose={closeModal}>
-        <button onClick={closeModal}>Close Modal</button>
-      </Modal>
+      <div>
+        <h3>{user.name}</h3>
+        <h3>{user.age}</h3>
+        <button onClick={updateUser}>update User</button>
+      </div>
     </div>
   );
-}
+};
 
 export default HookState;
