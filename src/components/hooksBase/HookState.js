@@ -5,24 +5,24 @@ import data from "./../../util/data";
 const HookState = () => {
   const [books, setBooks] = useState([]);
 
-  const [count, setCount] = useState(0);
-  const [age, setAge] = useState(0);
-
-  useEffect(() => {
+  const fetchBook = async () => {
     console.log("I got called");
     setTimeout(() => {
       setBooks(data);
     }, 2000);
-  }, [count, age]);
-
-  const updateCount = () => {
-    setBooks([]);
-    setCount(count + 1);
   };
+
+  useEffect(() => {
+    let isDataFethced = true;
+    if (isDataFethced) fetchBook();
+
+    return () => {
+      isDataFethced = false;
+    };
+  }, []);
 
   return (
     <div>
-      <button onClick={updateCount}>Add {count}</button>
       {books.length === 0 ? <div>Loading</div> : books.map((b) => <h3>{b.name}</h3>)}
     </div>
   );
