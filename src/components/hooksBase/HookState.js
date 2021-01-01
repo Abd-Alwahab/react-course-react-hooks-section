@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import data from "./../../util/data";
 
 const HookState = () => {
-  const [books, setBooks] = useState([]);
+  const inputRef = useRef(null);
 
-  const fetchBook = async () => {
-    console.log("I got called");
-    setTimeout(() => {
-      setBooks(data);
-    }, 2000);
-  };
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    let isDataFethced = true;
-    if (isDataFethced) fetchBook();
-
-    return () => {
-      isDataFethced = false;
-    };
+    inputRef.current.focus();
   }, []);
+
+  const handleClick = () => {
+    setValue(inputRef.current.value);
+  };
 
   return (
     <div>
-      {books.length === 0 ? <div>Loading</div> : books.map((b) => <h3>{b.name}</h3>)}
+      <input className="input" type="text" placeholder="Enter your text" ref={inputRef} />
+
+      <button onClick={handleClick}>Add</button>
+
+      <p>{value}</p>
     </div>
   );
 };
