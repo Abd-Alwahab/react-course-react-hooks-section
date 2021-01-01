@@ -1,27 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
-
-import data from "./../../util/data";
+import React, { useEffect, useRef, useState } from "react";
 
 const HookState = () => {
-  const inputRef = useRef(null);
+  const [imgDie, setImgDie] = useState({});
+  const imgRef = useRef(null);
 
-  const [value, setValue] = useState("");
+  const handleImageLoad = () => {
+    setImgDie({
+      width: imgRef.current.clientWidth,
+      height: imgRef.current.clientHeight,
+    });
+  };
 
   useEffect(() => {
-    inputRef.current.focus();
+    console.log("The Page is Rendered");
   }, []);
-
-  const handleClick = () => {
-    setValue(inputRef.current.value);
-  };
 
   return (
     <div>
-      <input className="input" type="text" placeholder="Enter your text" ref={inputRef} />
+      <img
+        ref={imgRef}
+        src="https://images.pexels.com/photos/6194910/pexels-photo-6194910.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+        alt="img"
+        onLoad={handleImageLoad}
+      />
 
-      <button onClick={handleClick}>Add</button>
-
-      <p>{value}</p>
+      <p>{imgDie.width}</p>
+      <p>{imgDie.height}</p>
     </div>
   );
 };
