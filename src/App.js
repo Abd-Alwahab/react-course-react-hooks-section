@@ -1,15 +1,32 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import HookState from "./components/hooksBase/HookState";
-import about from "./pages/about";
+import React, { useCallback, useState } from "react";
+import Header from "./components/hooksBase/Header";
+import Logout from "./components/hooksBase/Logout";
+import UpdateUser from "./components/hooksBase/UpdateUser";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [user, setUser] = useState({});
+
+  const updateUser = (newUser) => {
+    console.log("new update function");
+
+    setUser(newUser);
+  };
+
+  const logout = () => {
+    console.log("new logout function");
+    setIsLoggedIn(false);
+  };
+
+  const updateComponents = () => {
+    console.log("Notify Component With New Updaed User");
+  };
+
   return (
     <div className="App">
-      <Switch>
-        <Route path="/" exact component={HookState} />
-        <Route path="/about" component={about} />
-      </Switch>
+      <UpdateUser updateUser={updateUser} />
+      <Logout isLoggedIn={isLoggedIn} logout={logout} />
+      <Header updateComponents={updateComponents} />
     </div>
   );
 }
