@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import ClassState from "./components/classBase/ClassState";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import HookState from "./components/hooksBase/HookState";
-import AuthContext from "./context/auth";
-import data from "./util/data";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <div className="App">
-        <HookState />
-      </div>
-    </AuthContext.Provider>
+    <div className="App">
+      <Switch>
+        <Route path="/" component={HookState} />
+      </Switch>
+    </div>
   );
 }
 
